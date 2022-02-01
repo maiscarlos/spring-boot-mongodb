@@ -3,9 +3,16 @@ package br.com.linecomp.springbootmongodb.domain;
 import java.io.Serializable;
 import java.util.Objects;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+//para informar que esta classe corresponde a uma colecao do MongoDB utilizar:
+
+@Document //(collection = "user") opicional
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
-
+	
+	@Id //informa qual o campo auto-increment
 	private String id;
 	private String name;
 	private String email;
