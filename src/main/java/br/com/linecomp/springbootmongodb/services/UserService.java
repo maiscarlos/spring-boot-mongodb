@@ -1,12 +1,14 @@
 package br.com.linecomp.springbootmongodb.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.linecomp.springbootmongodb.domain.User;
 import br.com.linecomp.springbootmongodb.repository.UserRepository;
+import br.com.linecomp.springbootmongodb.services.exception.ObjectNotFoundException;
 
 @Service
 public class UserService {
@@ -16,5 +18,12 @@ public class UserService {
 	
 	public List<User> findAll(){ //metodo para retornar uma lista de usuarios do banco
 		return repo.findAll();
+	}
+	
+	public User findById(String id) {
+		
+		Optional<User> obj = repo.findById(id); // obrigatorio objeto Optional de User
+		return obj.orElseThrow(() -> new ObjectNotFoundException("Id "+id+" não encontrado"));
+		//retorna o objeto ou lanca a excecao...
 	}
 }
